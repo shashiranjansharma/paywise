@@ -1,9 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-
 @Component({
   selector: 'app-multiselect4u',
   templateUrl: './multiselect4u.component.html',
-  styleUrls: ['./multiselect4u.component.css']
+  styleUrls: ['./multiselect4u.component.css'],
 })
 export class Multiselect4uComponent implements OnInit {
   
@@ -29,6 +28,14 @@ export class Multiselect4uComponent implements OnInit {
   	}
   	//console.log("My Result: "+ this.results);
   	this.selectedOptions.emit(this.results);
+  }
+
+  closeOption(){
+    console.log("hello i am here");
+    if(this.showOptions == false){
+        this.showOptions = true;
+    }
+    
   }
 
   constructor() { }

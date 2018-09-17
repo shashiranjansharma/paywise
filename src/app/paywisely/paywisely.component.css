@@ -16,10 +16,7 @@ button{
 label{
 	margin-top: 20px;
 }
-#partyMembers{
-	max-height: 20px;
-	overflow:hidden;
-}
+
 form{
 	border:none;
 }
@@ -28,6 +25,8 @@ form{
 	font-size: 20px;
 	padding: 5px 20px;
 	margin: 5px 70px;
+	word-break: break-all;
+	height: auto;
 }
 h3{
 	margin-top: 10px;

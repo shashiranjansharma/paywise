@@ -57,7 +57,6 @@ export class PaywiselyComponent implements OnInit {
 
 	addExpenses(){
 		var z = this.users.length;
-		console.log(this.partMembers);
 		var x = this.partMembers.length;
 		for(var i=0; i<z; i++){
 			if(this.users[i].name === this.payer){
@@ -71,6 +70,9 @@ export class PaywiselyComponent implements OnInit {
 				}
 			}
 		}
+		this.partMembers = [];
+		this.expense = 0;
+		this.payer = {name: "", credit: 0, debit: 0};
 		this.showExpense = true;
 		console.log(this.users);
 	}
