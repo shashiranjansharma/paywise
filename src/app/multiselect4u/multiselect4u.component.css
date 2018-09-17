@@ -1,0 +1,26 @@
+div{
+	padding: 0px;
+	position: relative;
+	display: initial-block;
+}
+.hello{
+	background: #eee;
+	width: 100%;
+	border: 1px solid #ccc;
+	z-index: 999;
+	position: absolute;
+	top: 40px;
+}
+input{
+	display: inline-block;
+}
+
+li{
+	 list-style: none;
+	 border-bottom: 1px solid #ccc;
+	 margin: 5px 15px;
+}
+ul{
+	//margin: 5px 0px;
+	padding: 0px;
+}

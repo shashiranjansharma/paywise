@@ -1,0 +1,21 @@
+<!-- <div>
+	<input type="text" placeholder="Select options from list..." name="mySelect" class="mySelect form-control" (click)="onShowOption()" value="{{results}}">
+	<span class="drop-down-button">V</span>
+	<div class="options" [hidden]="showOptions">
+		<ul>
+			<li *ngFor="let option of options"><input type="checkbox" (change)="onSelectOption(option, $event)">&nbsp; &nbsp;{{option}}</li>
+		</ul>		
+	</div>
+</div> -->
+<div class="input-group">
+  <input type="text" placeholder="Select options from list..." name="mySelect" class="mySelect form-control" value="{{results}}" aria-label="Text input with segmented dropdown button">
+  <div class="input-group-append">
+    <span type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" (click)="onShowOption()">
+    </span>
+  </div>
+  <div class="hello" [hidden]="showOptions">
+  	<ul>
+		<li *ngFor="let option of options"><input type="checkbox" (change)="onSelectOption(option, $event)">&nbsp; &nbsp;{{option}}</li>
+	</ul>
+  </div>
+</div>

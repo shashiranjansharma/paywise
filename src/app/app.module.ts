@@ -4,16 +4,20 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './footer/footer.component';
 import { PaywiselyComponent } from './paywisely/paywisely.component';
+import { Multiselect4uComponent } from './multiselect4u/multiselect4u.component';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
-    PaywiselyComponent
+    PaywiselyComponent,
+    Multiselect4uComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AngularFontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

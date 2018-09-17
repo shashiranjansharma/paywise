@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-paywisely',
@@ -9,28 +9,33 @@ export class PaywiselyComponent implements OnInit {
 
 	users = [];
 	userName = "";
-	user = {
-		name: "",
-		credit: 0,
-		debit: 0
-	};
 	payer = {
 		name: "",
 		credit: 0,
 		debit: 0
 	};
-	partMembers = [];
+	isUserExists = false;
+	showExpense = false;
+	partMembers =[];
+	options = [];
 	expense = 0;
 	userExists(){
 		var z = this.users.length;
 		for(var i=0; i<z; i++){
-			if(this.users[i].name === this.userName){
+			var uName = this.userName.trim().toLowerCase();
+			if(this.users[i].name === uName){
+				this.isUserExists = true;
 				return true;
 			}
 			else{
 				return false;
 			}
 		}
+	}
+
+	//Getting output with event emitter from multiselect4u.
+	onSelectChange(value){
+		this.partMembers = value;
 	}
 
 	addUser(){
@@ -41,7 +46,8 @@ export class PaywiselyComponent implements OnInit {
 				credit: 0,
 				debit: 0
 			});
-			console.log(this.users);
+			this.options.push(this.userName);
+			//console.log(this.users);
 			this.userName="";
 	    }
 	    else{
@@ -51,8 +57,8 @@ export class PaywiselyComponent implements OnInit {
 
 	addExpenses(){
 		var z = this.users.length;
+		console.log(this.partMembers);
 		var x = this.partMembers.length;
-		console.log(x);
 		for(var i=0; i<z; i++){
 			if(this.users[i].name === this.payer){
 				this.users[i].credit = this.users[i].credit + this.expense;
@@ -60,18 +66,19 @@ export class PaywiselyComponent implements OnInit {
 		}
 		for(var p=0; p<x; p++ ){
 			for(var j=0; j<z; j++){
-				console.log(this.partMembers[p]);
-				console.log(this.users[j].name);
 				if(this.users[j].name === this.partMembers[p]){
 					this.users[j].debit = (this.users[j].debit - (this.expense/x));
 				}
 			}
 		}
+		this.showExpense = true;
 		console.log(this.users);
 	}
-  constructor() { }
 
-  ngOnInit() {
-  }
+	constructor() { 
+	}
+
+	ngOnInit() { 			
+	}
 
 }

@@ -2,44 +2,48 @@
 	<div class="row">
 		<div class="col-md-6">
 			<h3>Add User</h3>
-			<form (ngSubmit)="addUser()">
-				<input type="text" name="user" class="form-control" [(ngModel)]="userName">
+			<form name="addUser" (ngSubmit)="addUser()">
+				<input type="text" name="user" class="form-control" [(ngModel)]="userName" maxlength="20" minlength="3">
+				<div class="alert alert-warning" *ngIf="isUserExists">
+				  <strong>Warning!</strong> User alteary exists.
+				</div>
 				<button class="btn btn-primary" type="submit" [disabled]="userName.length == 0">Add User</button>
 			</form>
 		</div>
 		<div class="col-md-6">
 			<h3>All Users:</h3>
-			<ol *ngIf="users.length != 0">
-				<li *ngFor="let user of users">{{user.name}}</li>
-			</ol>
+			<div *ngIf="users.length != 0">
+				<div class="user" *ngFor="let user of users"><span>#{{users.indexOf(user)+1}}. &nbsp; &nbsp;</span>{{user.name}}</div>
+			</div>
 			<h4 *ngIf="users.length == 0">No User added.</h4>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-6">
 			<h3>Create Expences:</h3>
-			<form  name="expenseForm" (ngSubmit)="addExpenses()" #expenseForm="ngForm">
+			<form class="form-control" name="expenseForm" (ngSubmit)="addExpenses()" #expenseForm="ngForm">
 				<label>Paid by:</label>
 				<select class="form-control" name="payer" [(ngModel)]="payer" required>
-					<option value="" disabled selected>Select payer...</option>
+					<option value="" disabled>Select payer...</option>
 					<option *ngFor="let user of users" [value]="user.name">{{user.name}}</option>
 				</select>
-				<label>Party Members:</label>
-				<select class="form-control" name="partMembers" id="partMembers" [multiple]="true" [(ngModel)]="partMembers" required>
-					<option value="" disabled selected>Select pary members...</option>
+				<!-- <label>Party Members:</label>
+				<select class="form-control" placeholder="Select part members.." name="partMembers" id="partMembers" [multiple]="true" [(ngModel)]="partMembers" required>
 					<option *ngFor="let user of users" [value]="user.name">{{user.name}}</option>
-				</select>
+				</select> -->
 				<label>Total Expense:</label>
 				<input type="number" class="form-control" name="expense" [(ngModel)]="expense" required>
+				<label>Total Expense:</label>
+				<app-multiselect4u [options]="options" (selectedOptions)="onSelectChange($event)" required></app-multiselect4u>
 				<button type="submit" class="btn btn-primary" [disabled]="expenseForm.invalid">Submit</button>
 			</form>
 		</div>
 		<div class="col-md-6">
 			<h3>Expences:</h3>
-			<ol *ngIf="(users.length != 0)">
-				<li *ngFor="let user of users">{{user.name}}  has spent {{user.credit + user.debit}}</li>
-			</ol>
-			<h4 *ngIf="users.length == 0">No Expense in record.</h4>
+			<div *ngIf="showExpense">
+				<div class="expense" *ngFor="let user of users"><span>#{{users.indexOf(user)+1}}. &nbsp; &nbsp;</span>{{user.name}}  has spent: <span class="float-r">{{user.credit + user.debit}}</span></div>
+			</div>
+			<h4 *ngIf="!showExpense">No Expense in record.</h4>
 		</div>
 	</div>
 </div>
